@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memory Card Game with Features</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="easy">
+
+  <h1>Memory Card Game</h1>
+
+  <div id="game-info">
+    <div>Moves: <span id="moves">0</span></div>
+    <div>Time: <span id="time">00:00</span></div>
+  </div>
+
+  <div class="controls-row">
+    <label for="difficulty-select" style="user-select:text;">
+      Difficulty:
+      <select id="difficulty-select" aria-label="Select difficulty">
+        <option value="easy" selected>Easy (8 cards)</option>
+        <option value="medium">Medium (16 cards)</option>
+        <option value="hard">Hard (24 cards)</option>
+      </select>
+    </label>
+
+    <label for="iconset-select" style="user-select:text;">
+      Icon Set:
+      <select id="iconset-select" aria-label="Select icon set">
+        <option value="fruits" selected>Fruits</option>
+        <option value="animals">Animals</option>
+        <option value="emojis">Emojis</option>
+      </select>
+    </label>
+
+    <button id="hint-btn" title="Reveal cards briefly (2 hints max)">Hint (2)</button>
+    <button id="pause-btn" title="Pause/Resume the timer">Pause</button>
+    <button id="darkmode-btn" title="Toggle dark mode">Dark Mode</button>
+    <button id="reset-btn" title="Restart game with confirmation">Restart</button>
+  </div>
+
+  <div id="progress-container" aria-label="Progress of matched pairs">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div id="board" role="grid" aria-live="polite" tabindex="0"></div>
+
+  <div id="leaderboard" aria-live="polite" aria-atomic="true">
+    <h2>Leaderboard</h2>
+    <div id="leaderboard-content">Loading...</div>
+  </div>
+
+  <div id="move-history" aria-live="polite" aria-atomic="true" role="log" aria-relevant="additions"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

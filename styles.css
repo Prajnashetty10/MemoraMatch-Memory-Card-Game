@@ -1,0 +1,247 @@
+:root {
+  --card-size: 100px;
+  --card-gap: 10px;
+  --primary-color: #4a90e2;
+  --background-color: #f0f4f8;
+  --card-bg: #ffffff;
+  --matched-color: #7ed6df;
+
+  --dark-bg: #121212;
+  --dark-card-bg: #222;
+  --dark-primary-color: #90caf9;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  color: #333;
+  transition: background-color 0.5s, color 0.5s;
+  user-select: none;
+}
+
+body.dark {
+  background-color: var(--dark-bg);
+  color: #ddd;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: var(--primary-color);
+  transition: color 0.5s;
+}
+body.dark h1 {
+  color: var(--dark-primary-color);
+}
+
+#game-info {
+  margin-bottom: 15px;
+  font-size: 18px;
+  display: flex;
+  gap: 20px;
+  user-select: text;
+}
+
+#difficulty-select, #iconset-select {
+  margin-bottom: 15px;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  user-select: text;
+}
+
+#board {
+  display: grid;
+  grid-gap: var(--card-gap);
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Different grid sizes for each difficulty */
+.easy #board {
+  grid-template-columns: repeat(4, var(--card-size));
+}
+.medium #board {
+  grid-template-columns: repeat(4, var(--card-size));
+}
+.hard #board {
+  grid-template-columns: repeat(6, var(--card-size));
+}
+
+.card {
+  width: var(--card-size);
+  height: var(--card-size);
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  touch-action: manipulation;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  user-select: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.card-front {
+  background-color: var(--card-bg);
+  border: 3px solid var(--primary-color);
+}
+body.dark .card-front {
+  background-color: var(--dark-card-bg);
+  border-color: var(--dark-primary-color);
+}
+
+.card-back {
+  background-color: var(--primary-color);
+  color: white;
+  transform: rotateY(180deg);
+}
+body.dark .card-back {
+  background-color: var(--dark-primary-color);
+}
+
+.matched {
+  background-color: var(--matched-color);
+  border-color: #2ecc71 !important;
+  cursor: default;
+  animation: bounce 0.4s ease;
+}
+body.dark .matched {
+  background-color: #27ae60;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+button, select {
+  font-family: inherit;
+  font-size: 16px;
+}
+
+#reset-btn, #hint-btn, #pause-btn, #darkmode-btn {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  user-select: none;
+}
+
+#reset-btn:hover, #hint-btn:hover, #pause-btn:hover, #darkmode-btn:hover {
+  background-color: #357abd;
+}
+
+#leaderboard {
+  margin-top: 10px;
+  font-size: 16px;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  padding: 10px;
+  user-select: text;
+  color: #333;
+  transition: background-color 0.5s, color 0.5s;
+}
+body.dark #leaderboard {
+  background: #222;
+  border-color: #444;
+  color: #ddd;
+}
+#leaderboard h2 {
+  margin-top: 0;
+  font-size: 18px;
+  text-align: center;
+}
+#leaderboard ul {
+  padding-left: 20px;
+  margin: 5px 0 0 0;
+}
+
+#move-history {
+  max-height: 150px;
+  overflow-y: auto;
+  font-family: monospace;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  padding: 5px;
+  margin-top: 10px;
+  font-size: 13px;
+  user-select: text;
+  transition: background-color 0.5s, color 0.5s;
+}
+body.dark #move-history {
+  background: #222;
+  border-color: #444;
+  color: #ddd;
+}
+
+#progress-container {
+  width: 320px;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+  user-select: none;
+  box-shadow: inset 0 0 5px #bbb;
+  transition: background-color 0.5s;
+}
+body.dark #progress-container {
+  background: #333;
+  box-shadow: inset 0 0 5px #555;
+}
+
+#progress-bar {
+  height: 100%;
+  background-color: #2ecc71;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+
+.controls-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  user-select: none;
+  margin-bottom: 10px;
+}
